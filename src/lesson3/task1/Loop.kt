@@ -67,7 +67,16 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun digitNumber(n: Int): Int = TODO()
+fun digitNumber(n: Int): Int {
+    var count = 1
+    var n = n
+    while (n > 9) {
+        n /= 10
+        count++
+    }
+    return count
+
+}
 
 /**
  * Простая
@@ -83,21 +92,48 @@ fun fib(n: Int): Int = TODO()
  * Для заданных чисел m и n найти наименьшее общее кратное, то есть,
  * минимальное число k, которое делится и на m и на n без остатка
  */
-fun lcm(m: Int, n: Int): Int = TODO()
+fun lcm(m: Int, n: Int): Int {
+    val b = m * n
+    var m = m
+    var n = n
+    var nod = 0
+    var nok = 0
+    while ((m != 0) && (n != 0)) {
+        if (m >= n) m %= n
+        else n %= m
+        nod = m + n
+    }
+    nok = b / nod
+    return nok
+}
 
 /**
  * Простая
  *
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
-fun minDivisor(n: Int): Int = TODO()
+fun minDivisor(n: Int): Int {
+    var count = 2
+    var n = n
+    while (n % count != 0) {
+        count++
+    }
+    return count
+}
 
 /**
  * Простая
  *
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
-fun maxDivisor(n: Int): Int = TODO()
+fun maxDivisor(n: Int): Int {
+    var count = n / 2
+    while (n % count != 0) {
+        count--
+    }
+    return count
+}
+
 
 /**
  * Простая
@@ -106,7 +142,17 @@ fun maxDivisor(n: Int): Int = TODO()
  * Взаимно простые числа не имеют общих делителей, кроме 1.
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
-fun isCoPrime(m: Int, n: Int): Boolean = TODO()
+fun isCoPrime(m: Int, n: Int): Boolean {
+    var n = n
+    var m = m
+    var nod = 0
+    while ((m != 0) && (n != 0)) {
+        if (m >= n) m %= n
+        else n %= m
+        nod = m + n
+    }
+    return nod ==1
+}
 
 /**
  * Простая
@@ -133,7 +179,18 @@ fun squareBetweenExists(m: Int, n: Int): Boolean = TODO()
  * Написать функцию, которая находит, сколько шагов требуется для
  * этого для какого-либо начального X > 0.
  */
-fun collatzSteps(x: Int): Int = TODO()
+fun collatzSteps(x: Int): Int {
+    var x = x
+    var count = 0
+    while (x != 1) {
+        count++
+        x = if (x % 2 == 0)
+            x / 2
+        else
+            3 * x + 1
+    }
+    return count
+}
 
 /**
  * Средняя
