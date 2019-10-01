@@ -25,8 +25,7 @@ fun isNumberHappy(number: Int): Boolean {
     val b = number % 100 / 10
     val c = number / 1000
     val d = number / 100 % 10
-    return if (a + b == c + d) true
-    else false
+    return a + b == c + d
 }
 /**
  * Простая
@@ -35,10 +34,7 @@ fun isNumberHappy(number: Int): Boolean {
  * Определить, угрожают ли они друг другу. Вернуть true, если угрожают.
  * Считать, что ферзи не могут загораживать друг друга.
  */
-fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean {
-    return if (abs(x1 - x2) == abs(y1 - y2) || (x1 == x2 || y1 == y2)) true
-    else false
-}
+fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = abs(x1 - x2) == abs(y1 - y2) || (x1 == x2 || y1 == y2)
 
 
 /**

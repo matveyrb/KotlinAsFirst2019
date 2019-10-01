@@ -70,9 +70,9 @@ fun ageDescription(age: Int): String =
     when {
         (age % 100) in 11..14 -> "$age лет"
         (age % 10) == 1 -> "$age год"
-    (age % 10)  in 2..4 -> "$age года"
-    else -> "$age лет"
-}
+        (age % 10) in 2..4 -> "$age года"
+        else -> "$age лет"
+    }
 
 /**
  * Простая
@@ -86,13 +86,12 @@ fun timeForHalfWay(
     t2: Double, v2: Double,
     t3: Double, v3: Double
 ): Double {
-    val Pol = ((t1 * v1) + (t2 * v2) + (t3 * v3)) / 2
+    val pol = ((t1 * v1) + (t2 * v2) + (t3 * v3)) / 2
     return when {
-        (Pol <= (t1 * v1)) -> Pol / v1
-        (Pol <= (t1 * v1 + t2 * v2)) -> t1 + (Pol - t1 * v1) / v2
-        else -> t1 + t2 + (Pol - t1 * v1 - t2 * v2) / v3
+        (pol <= (t1 * v1)) -> pol / v1
+        (pol <= (t1 * v1 + t2 * v2)) -> t1 + (pol - t1 * v1) / v2
+        else -> t1 + t2 + (pol - t1 * v1 - t2 * v2) / v3
     }
-
 }
 
 /**
@@ -146,16 +145,17 @@ fun rookOrBishopThreatens(
  * прямоугольным (вернуть 1) или тупоугольным (вернуть 2).
  * Если такой треугольник не существует, вернуть -1.
  */
-fun triangleKind(a: Double, b: Double, c: Double):Int {
-    val T = maxOf(a, b, c)
-    val R = minOf(a, b, c)
-    val O = (a + b + c) - T - R
-    return if (R + O > T) when {
+fun triangleKind(a: Double, b: Double, c: Double): Int {
+    val t = maxOf(a, b, c)
+    val r = minOf(a, b, c)
+    val o = (a + b + c) - t - r
+    return if (r + o > t) when {
         sqr(a) + sqr(b) == sqr(c) || sqr(b) + sqr(c) == sqr(a) || sqr(a) + sqr(c) == sqr(b) -> 1
         (sqr(a) > sqr(b) + sqr(c) || sqr(b) > sqr(a) + sqr(c) || sqr(c) > sqr(a) + sqr(b)) -> 2
         else -> 0
     } else -1
 }
+
 /**
  * Средняя
  *
@@ -164,7 +164,5 @@ fun triangleKind(a: Double, b: Double, c: Double):Int {
  * Найти длину пересечения отрезков AB и CD.
  * Если пересечения нет, вернуть -1.
  */
-fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
-    return if (min(b, d) - max(a, c) >= 0) (min(b, d) - max(a, c))
-    else -1
-}
+fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int = if (min(b, d) - max(a, c) >= 0) (min(b, d) - max(a, c))
+else -1
