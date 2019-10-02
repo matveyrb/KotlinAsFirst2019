@@ -151,7 +151,7 @@ fun isCoPrime(m: Int, n: Int): Boolean {
         else n %= m
         nod = m + n
     }
-    return nod ==1
+    return nod == 1
 }
 
 /**
@@ -221,7 +221,15 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun revert(n: Int): Int = TODO()
+fun revert(n: Int): Int {
+    var a = 0
+    var n = n
+    while (n > 0) {
+        a = (a * 10) + (n % 10)
+        n /= 10
+    }
+    return a
+}
 
 /**
  * Средняя
@@ -232,7 +240,16 @@ fun revert(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun isPalindrome(n: Int): Boolean = TODO()
+fun isPalindrome(n: Int): Boolean {
+    var n = n
+    var b = n
+    var c = 0
+    while (b > 0) {
+        c = (c * 10) + (b % 10)
+        b /= 10
+    }
+    return n == c
+}
 
 /**
  * Средняя
@@ -242,7 +259,18 @@ fun isPalindrome(n: Int): Boolean = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun hasDifferentDigits(n: Int): Boolean = TODO()
+fun hasDifferentDigits(n: Int): Boolean {
+    var n = n
+    var b = 0
+    while (n > 9) {
+        if ((n % 10) != (n % 100 / 10)) {
+            b += 1
+        }
+        n /= 10
+    }
+    return b != 0
+}
+
 
 /**
  * Сложная
