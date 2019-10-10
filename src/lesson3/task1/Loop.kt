@@ -115,7 +115,6 @@ fun lcm(m: Int, n: Int): Int {
  */
 fun minDivisor(n: Int): Int {
     var count = 2
-    var n = n
     while (n % count != 0) {
         count++
     }
@@ -242,7 +241,6 @@ fun revert(n: Int): Int {
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun isPalindrome(n: Int): Boolean {
-    var n = n
     var b = n
     var c = 0
     while (b > 0) {
@@ -283,7 +281,6 @@ fun hasDifferentDigits(n: Int): Boolean {
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun squareSequenceDigit(n: Int): Int {
-    var n = n
     var a = 1
     var b = 1
     while (n > a) {

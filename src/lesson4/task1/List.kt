@@ -4,7 +4,7 @@ package lesson4.task1
 
 import lesson1.task1.discriminant
 import lesson1.task1.sqr
-import kotlin.math.roundToInt
+import kotlin.math.pow
 import kotlin.math.sqrt
 
 /**
@@ -143,7 +143,7 @@ fun mean(list: List<Double>): Double =
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
 fun center(list: MutableList<Double>): MutableList<Double> {
-    var a = mean(list)
+    val a = mean(list)
     for (i in 0 until list.size)
         list[i] -= a
     return list
@@ -156,7 +156,12 @@ fun center(list: MutableList<Double>): MutableList<Double> {
  * представленные в виде списков a и b. Скалярное произведение считать по формуле:
  * C = a1b1 + a2b2 + ... + aNbN. Произведение пустых векторов считать равным 0.
  */
-fun times(a: List<Int>, b: List<Int>): Int = TODO()
+fun times(a: List<Int>, b: List<Int>): Int {
+    var c = 0
+    for (i in 0 until a.size)
+        c += a[i] * b[i]
+    return c
+}
 
 /**
  * Средняя
@@ -166,7 +171,13 @@ fun times(a: List<Int>, b: List<Int>): Int = TODO()
  * Коэффициенты многочлена заданы списком p: (p0, p1, p2, p3, ..., pN).
  * Значение пустого многочлена равно 0 при любом x.
  */
-fun polynom(p: List<Int>, x: Int): Int = TODO()
+fun polynom(p: List<Int>, x: Int): Int {
+    var count = 0
+    for (i in 0 until p.size) {
+        count += p[i] * x.toDouble().pow(i.toDouble()).toInt()
+    }
+    return count
+}
 
 /**
  * Средняя
