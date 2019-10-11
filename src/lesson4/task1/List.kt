@@ -189,7 +189,14 @@ fun polynom(p: List<Int>, x: Int): Int {
  *
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
-fun accumulate(list: MutableList<Int>): MutableList<Int> = TODO()
+fun accumulate(list: MutableList<Int>): MutableList<Int> {
+    var count = 0
+    for (i in 0 until list.size) {
+        count += list[i]
+        list[i] = count
+    }
+    return list
+}
 
 /**
  * Средняя
@@ -198,7 +205,17 @@ fun accumulate(list: MutableList<Int>): MutableList<Int> = TODO()
  * Результат разложения вернуть в виде списка множителей, например 75 -> (3, 5, 5).
  * Множители в списке должны располагаться по возрастанию.
  */
-fun factorize(n: Int): List<Int> = TODO()
+fun factorize(n: Int): List<Int> {
+    val list: MutableList<Int> = mutableListOf()
+    var count = 2
+    var a = n
+    for (i in 1..n)
+        if (a % count == 0) {
+            a /= count
+            list.add(count)
+        } else count++
+    return list
+}
 
 /**
  * Сложная
