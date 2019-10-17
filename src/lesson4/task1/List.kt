@@ -4,6 +4,8 @@ package lesson4.task1
 
 import lesson1.task1.discriminant
 import lesson1.task1.sqr
+import lesson3.task1.isPrime
+import java.io.File.separator
 import kotlin.math.pow
 import kotlin.math.sqrt
 
@@ -209,12 +211,18 @@ fun factorize(n: Int): List<Int> {
     val list: MutableList<Int> = mutableListOf()
     var count = 2
     var a = n
-    for (i in 1..n)
-        if (a % count == 0) {
-            a /= count
-            list.add(count)
-        } else count++
-    return list
+    return if (isPrime(n)) {
+        list.add(n)
+        list
+    } else {
+        while (count <= sqrt(a.toDouble()))
+            if (a % count == 0) {
+                a /= count
+                list.add(count)
+            } else count++
+        list.add(a)
+        list
+    }
 }
 
 /**
@@ -224,7 +232,7 @@ fun factorize(n: Int): List<Int> {
  * Результат разложения вернуть в виде строки, например 75 -> 3*5*5
  * Множители в результирующей строке должны располагаться по возрастанию.
  */
-fun factorizeToString(n: Int): String = TODO()
+fun factorizeToString(n: Int): String = factorize(n).joinToString(separator = "*")
 
 /**
  * Средняя
@@ -233,11 +241,20 @@ fun factorizeToString(n: Int): String = TODO()
  * Результат перевода вернуть в виде списка цифр в base-ичной системе от старшей к младшей,
  * например: n = 100, base = 4 -> (1, 2, 1, 0) или n = 250, base = 14 -> (1, 3, 12)
  */
-fun convert(n: Int, base: Int): List<Int> = TODO()
+fun convert(n: Int, base: Int): List<Int> {
+    val list: MutableList<Int> = mutableListOf()
+    var b: Int
+    var a = n
+    while (a != 0) {
+        b = a % base
+        list.add(b)
+        a /= base
+    }
+    return list.reversed()
+}
 
 /**
- * Сложная
- *
+ * Сложная*
  * Перевести заданное целое число n >= 0 в систему счисления с основанием 1 < base < 37.
  * Результат перевода вернуть в виде строки, цифры более 9 представлять латинскими
  * строчными буквами: 10 -> a, 11 -> b, 12 -> c и так далее.
@@ -254,7 +271,7 @@ fun convertToString(n: Int, base: Int): String = TODO()
  * Перевести число, представленное списком цифр digits от старшей к младшей,
  * из системы счисления с основанием base в десятичную.
  * Например: digits = (1, 3, 12), base = 14 -> 250
- */
+ * */
 fun decimal(digits: List<Int>, base: Int): Int = TODO()
 
 /**
