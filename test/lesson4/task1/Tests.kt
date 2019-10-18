@@ -200,7 +200,7 @@ class Tests {
     }
 
     @Test
-    @Tag("Impossible")
+    @Tag("Normal")
     fun decimal() {
         assertEquals(1, decimal(listOf(1), 2))
         assertEquals(100, decimal(listOf(1, 2, 1, 0), 4))
@@ -230,7 +230,7 @@ class Tests {
     }
 
     @Test
-    @Tag("Normal")
+    @Tag("Impossible")
     fun russian() {
         assertEquals("триста семьдесят пять", russian(375))
         assertEquals("двадцать две тысячи девятьсот шестьдесят четыре", russian(22964))
