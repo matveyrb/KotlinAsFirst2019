@@ -5,7 +5,7 @@ package lesson4.task1
 import lesson1.task1.discriminant
 import lesson1.task1.sqr
 import lesson3.task1.isPrime
-import java.io.File.separator
+import java.lang.Math.pow
 import kotlin.math.pow
 import kotlin.math.sqrt
 
@@ -273,7 +273,13 @@ fun convertToString(n: Int, base: Int): String = TODO()
  * из системы счисления с основанием base в десятичную.
  * Например: digits = (1, 3, 12), base = 14 -> 250
  * */
-fun decimal(digits: List<Int>, base: Int): Int = TODO()
+fun decimal(digits: List<Int>, base: Int): Int {
+    var a = 0
+    for (i in 0 until digits.size) {
+        a += (digits.reversed()[i] * base.toDouble().pow(i.toDouble()).toInt())
+    }
+    return a
+}
 
 /**
  * Сложная
