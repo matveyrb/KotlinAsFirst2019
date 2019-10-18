@@ -10,7 +10,7 @@ import kotlin.math.sqrt
 
 class Tests {
     @Test
-    @Tag("Impossible")
+    @Tag("Example")
     fun pointDistance() {
         assertEquals(0.0, Point(0.0, 0.0).distance(Point(0.0, 0.0)), 1e-5)
         assertEquals(5.0, Point(3.0, 0.0).distance(Point(0.0, 4.0)), 1e-5)
@@ -18,14 +18,14 @@ class Tests {
     }
 
     @Test
-    @Tag("Hard")
+    @Tag("Example")
     fun halfPerimeter() {
         assertEquals(6.0, Triangle(Point(0.0, 0.0), Point(0.0, 3.0), Point(4.0, 0.0)).halfPerimeter(), 1e-5)
         assertEquals(2.0, Triangle(Point(0.0, 0.0), Point(0.0, 1.0), Point(0.0, 2.0)).halfPerimeter(), 1e-5)
     }
 
     @Test
-    @Tag("Hard")
+    @Tag("Example")
     fun triangleArea() {
         assertEquals(6.0, Triangle(Point(0.0, 0.0), Point(0.0, 3.0), Point(4.0, 0.0)).area(), 1e-5)
         assertEquals(0.0, Triangle(Point(0.0, 0.0), Point(0.0, 1.0), Point(0.0, 2.0)).area(), 1e-5)
@@ -186,7 +186,7 @@ class Tests {
     }
 
     @Test
-    @Tag("Example")
+    @Tag("Hard")
     fun bisectorByPoints() {
         assertApproxEquals(Line(Point(2.0, 0.0), PI / 2), bisectorByPoints(Point(0.0, 0.0), Point(4.0, 0.0)))
         assertApproxEquals(Line(Point(1.0, 2.0), 0.0), bisectorByPoints(Point(1.0, 5.0), Point(1.0, -1.0)))
@@ -206,7 +206,7 @@ class Tests {
     }
 
     @Test
-    @Tag("Example")
+    @Tag("Hard")
     fun circleByThreePoints() {
         val result = circleByThreePoints(Point(5.0, 0.0), Point(3.0, 4.0), Point(0.0, -5.0))
         assertTrue(result.center.distance(Point(0.0, 0.0)) < 1e-5)
@@ -214,7 +214,7 @@ class Tests {
     }
 
     @Test
-    @Tag("Example")
+    @Tag("Impossible")
     fun minContainingCircle() {
         val p1 = Point(0.0, 0.0)
         val p2 = Point(1.0, 4.0)
