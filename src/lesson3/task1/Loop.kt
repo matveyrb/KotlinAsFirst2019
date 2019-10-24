@@ -3,6 +3,7 @@
 package lesson3.task1
 
 import lesson1.task1.sqr
+import kotlin.math.abs
 import kotlin.math.sqrt
 
 /**
@@ -71,7 +72,7 @@ fun digitCountInNumber(n: Int, m: Int): Int =
 fun digitNumber(n: Int): Int {
     var count = 1
     var a = n
-    while (a > 9) {
+    while (abs(a) > 9) {
         a /= 10
         count++
     }
