@@ -157,7 +157,7 @@ fun whoAreInBoth(a: List<String>, b: List<String>): List<String> = a.toSet().int
  *   ) -> mapOf("Emergency" to "112, 911", "Police" to "02")
  */
 fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<String, String> {
-    val mapC: MutableMap<String, String> = subtractOf(mapA.toMutableMap(), mapB.toMutableMap())
+    val mapC = subtractOf(mapA.toMutableMap(), mapB.toMutableMap())
     for ((key, value) in mapB)
         if (mapC[key] == null)
             mapC[key] = value
@@ -201,8 +201,9 @@ fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): S
             price = stuff[key]?.second!!
         }
     if (!check) return null
-    for ((key) in stuff)
+    for ((key) in stuff) {
         if (stuff[key]?.second == price) return key
+    }
     return null
 }
 
