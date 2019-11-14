@@ -10,8 +10,8 @@ package lesson5.task1
  * игнорируется.
  */
 fun shoppingListCost(
-    shoppingList: List<String>,
-    costs: Map<String, Double>
+        shoppingList: List<String>,
+        costs: Map<String, Double>
 ): Double {
     var totalCost = 0.0
 
@@ -32,8 +32,8 @@ fun shoppingListCost(
  * для которых телефон начинается с заданного кода страны `countryCode`
  */
 fun filterByCountryCode(
-    phoneBook: MutableMap<String, String>,
-    countryCode: String
+        phoneBook: MutableMap<String, String>,
+        countryCode: String
 ) {
     val namesToRemove = mutableListOf<String>()
 
@@ -55,8 +55,8 @@ fun filterByCountryCode(
  * и вернуть отфильтрованный текст
  */
 fun removeFillerWords(
-    text: List<String>,
-    vararg fillerWords: String
+        text: List<String>,
+        vararg fillerWords: String
 ): List<String> {
     val fillerWordSet = setOf(*fillerWords)
 
@@ -192,7 +192,19 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
  *     "печенье"
  *   ) -> "Мария"
  */
-fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? = TODO()
+fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
+    var price = 0.0
+    var check = false
+    for ((key) in stuff)
+        if (stuff[key]?.second!! < price || (stuff[key]?.first == kind) && (price == 0.0)) {
+            check = true
+            price = stuff[key]?.second!!
+        }
+    if (!check) return null
+    for ((key) in stuff)
+        if (stuff[key]?.second == price) return key
+    return null
+}
 
 /**
  * Средняя
@@ -203,7 +215,13 @@ fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): S
  * Например:
  *   canBuildFrom(listOf('a', 'b', 'o'), "baobab") -> true
  */
-fun canBuildFrom(chars: List<Char>, word: String): Boolean = TODO()
+fun canBuildFrom(chars: List<Char>, word: String): Boolean =
+        chars.map {
+            it.toLowerCase()
+        }.toSet().containsAll((word.map {
+            it.toLowerCase()
+        }.toSet()))
+
 
 /**
  * Средняя
@@ -228,7 +246,16 @@ fun extractRepeats(list: List<String>): Map<String, Int> = TODO()
  * Например:
  *   hasAnagrams(listOf("тор", "свет", "рот")) -> true
  */
-fun hasAnagrams(words: List<String>): Boolean = TODO()
+fun hasAnagrams(words: List<String>): Boolean {
+    val check = mutableListOf<List<Char>>()
+    for (key in words) {
+        val anagram = key.toLowerCase().toSet().sorted()
+        if (check.contains(anagram))
+            return true
+        check.add(anagram)
+    }
+    return false
+}
 
 /**
  * Сложная
@@ -273,7 +300,14 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
  *   findSumOfTwo(listOf(1, 2, 3), 4) -> Pair(0, 2)
  *   findSumOfTwo(listOf(1, 2, 3), 6) -> Pair(-1, -1)
  */
-fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> = TODO()
+fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
+    val indices = mutableMapOf<Int, Int>()
+    for (i in list.indices) {
+        if (list[i] in indices) return indices[list[i]]!! to i
+        else indices[number - list[i]] = i
+    }
+    return Pair(-1, -1)
+}
 
 /**
  * Очень сложная
