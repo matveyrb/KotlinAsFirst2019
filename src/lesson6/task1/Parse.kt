@@ -129,7 +129,7 @@ fun dateStrToDigit(str: String): String {
         "декабря" -> "12"
         else -> return ""
     }
-    return String.format("%02d.%s.%02d", day, month, year)
+    return String.format("%02d.%s.%d", day, month, year)
 }
 
 /**
@@ -142,7 +142,49 @@ fun dateStrToDigit(str: String): String {
  * Обратите внимание: некорректная с точки зрения календаря дата (например, 30 февраля 2009) считается неверными
  * входными данными.
  */
-fun dateDigitToStr(digital: String): String = TODO()
+fun dateDigitToStr(digital: String): String {
+    val dates = digital.split(".").toMutableList()
+    if (!(digital.matches(Regex("""(\d\d).(\d\d).(\d+)""")))) return ""
+    val day = dates[0].toInt()
+    var month = dates[1]
+    val year = dates[2].toInt()
+    if ((year % 400 != 0) && (year % 4 != 0 || year % 100 == 0) && month == "02" && day > 28) return ""
+    if (day > 31 && (month in listOf(
+            "01",
+            "03",
+            "05",
+            "07",
+            "08",
+            "10",
+            "12"
+        ))
+    ) return ""
+    if ((day > 30) && (month in listOf(
+            "01",
+            "04",
+            "06",
+            "09",
+            "11"
+        )
+                )
+    ) return ""
+    month = when (month) {
+        "01" -> "января"
+        "02" -> "февраля"
+        "03" -> "марта"
+        "04" -> "апреля"
+        "05" -> "мая"
+        "06" -> "июня"
+        "07" -> "июля"
+        "08" -> "августа"
+        "09" -> "сентября"
+        "10" -> "октября"
+        "11" -> "ноября"
+        "12" -> "декабря"
+        else -> return ""
+    }
+    return String.format("%d %s %d", day, month, year)
+}
 
 /**
  * Средняя
