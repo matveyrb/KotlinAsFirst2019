@@ -2,6 +2,9 @@
 
 package lesson6.task1
 
+import kotlinx.html.attributes.stringSetDecode
+import lesson2.task2.daysInMonth
+
 /**
  * Пример
  *
@@ -69,7 +72,65 @@ fun main() {
  * Обратите внимание: некорректная с точки зрения календаря дата (например, 30.02.2009) считается неверными
  * входными данными.
  */
-fun dateStrToDigit(str: String): String = TODO()
+/*  val dates = listOf(
+    "",
+    "января",
+    "февраля",
+    "марта",
+    "апреля",
+    "мая",
+    "июня",
+    "июля",
+    "августа",
+    "сентября",
+    "октября",
+    "ноября",
+    "декабря"
+)*/
+
+fun dateStrToDigit(str: String): String {
+    val dates = str.split(" ").toMutableList()
+    if (!(str.matches(Regex("""(\d\d?) ([А-я]+) (\d+)""")))) return ""
+    val day = dates[0].toInt()
+    var month = dates[1]
+    val year = dates[2].toInt()
+    if ((year % 400 != 0) && (year % 4 != 0 || year % 100 == 0) && month == "февраля" && day > 28) return ""
+    if (day > 31 && (month in listOf(
+            "января",
+            "марта",
+            "мая",
+            "июля",
+            "августа",
+            "октября",
+            "декабря"
+        ))
+    ) return ""
+    if ((day > 30) && (month in listOf(
+            "января",
+            "апреля",
+            "июня",
+            "сентября",
+            "ноября"
+        )
+                )
+    ) return ""
+    month = when (month) {
+        "января" -> "01"
+        "февраля" -> "02"
+        "марта" -> "03"
+        "апреля" -> "04"
+        "мая" -> "05"
+        "июня" -> "06"
+        "июля" -> "07"
+        "августа" -> "08"
+        "сентября" -> "09"
+        "октября" -> "10"
+        "ноября" -> "11"
+        "декабря" -> "12"
+        else -> return ""
+    }
+    return String.format("%02d.%s.%02d", day, month, year)
+}
 
 /**
  * Средняя
