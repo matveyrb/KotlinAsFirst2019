@@ -94,7 +94,7 @@ fun dateStrToDigit(str: String): String {
     val day = dates[0].toInt()
     var month = dates[1]
     val year = dates[2].toInt()
-    if ((year % 400 != 0) && (year % 4 != 0 || year % 100 == 0) && month == "февраля" && day > 28) return ""
+    if (((year % 400 != 0) && (year % 4 != 0 || year % 100 == 0) && month == "февраля" && day > 28) || day > 31) return ""
     if (day > 31 && (month in listOf(
             "января",
             "марта",
@@ -106,7 +106,6 @@ fun dateStrToDigit(str: String): String {
         ))
     ) return ""
     if ((day > 30) && (month in listOf(
-            "января",
             "апреля",
             "июня",
             "сентября",
@@ -148,7 +147,7 @@ fun dateDigitToStr(digital: String): String {
     val day = dates[0].toInt()
     var month = dates[1]
     val year = dates[2].toInt()
-    if ((year % 400 != 0) && (year % 4 != 0 || year % 100 == 0) && month == "02" && day > 28) return ""
+    if (((year % 400 != 0) && (year % 4 != 0 || year % 100 == 0) && month == "02" && day > 28) || day > 31) return ""
     if (day > 31 && (month in listOf(
             "01",
             "03",
@@ -160,7 +159,6 @@ fun dateDigitToStr(digital: String): String {
         ))
     ) return ""
     if ((day > 30) && (month in listOf(
-            "01",
             "04",
             "06",
             "09",
