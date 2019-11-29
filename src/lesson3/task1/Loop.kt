@@ -241,15 +241,8 @@ fun revert(n: Int): Int {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun isPalindrome(n: Int): Boolean {
-    var b = n
-    var c = 0
-    while (b > 0) {
-        c = (c * 10) + (b % 10)
-        b /= 10
-    }
-    return n == c
-}
+fun isPalindrome(n: Int): Boolean = n == revert(n)
+
 
 /**
  * Средняя
