@@ -2,7 +2,6 @@
 
 package lesson6.task1
 
-import kotlinx.html.attributes.stringSetDecode
 import lesson2.task2.daysInMonth
 
 /**
@@ -162,7 +161,12 @@ fun dateDigitToStr(digital: String): String {
  *
  * PS: Дополнительные примеры работы функции можно посмотреть в соответствующих тестах.
  */
-fun flattenPhoneNumber(phone: String): String = TODO()
+fun flattenPhoneNumber(phone: String): String {
+    val a = Regex("""[-\s]""").replace(phone, "")
+    if (a.matches(Regex("""(\+?(\d+)?(\(\d+\))?\d+)"""))) return a.replace(Regex("""[()]"""), "")
+    return ""
+}
+
 
 /**
  * Средняя
@@ -209,7 +213,12 @@ fun plusMinus(expression: String): Int = TODO()
  * Вернуть индекс начала первого повторяющегося слова, или -1, если повторов нет.
  * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в')
  */
-fun firstDuplicateIndex(str: String): Int = TODO()
+fun firstDuplicateIndex(str: String): Int {
+    val a = str.toLowerCase()
+    val b = Regex("""([^\s]+)\s\1""").find(a)
+    if (b != null) return a.indexOf(b.value)
+    return -1
+}
 
 /**
  * Сложная
