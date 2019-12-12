@@ -115,11 +115,9 @@ fun gcd(a: Int, b: Int): Int = if (b == 0) b else gcd(b, a % b) */
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-    var count = 2
-    while (n % count != 0) {
-        count++
-    }
-    return count
+    for (i in 2..sqrt(n.toDouble()).toInt())
+        if (n % i == 0) return i
+    return n
 }
 
 /**
