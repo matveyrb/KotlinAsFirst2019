@@ -163,7 +163,7 @@ fun dateDigitToStr(digital: String): String {
  */
 fun flattenPhoneNumber(phone: String): String {
     val a = Regex("""[-\s]""").replace(phone, "")
-    if (a.matches(Regex("""(\+?(\d+)?(\(\d+\))?\d+)"""))) return a.replace(Regex("""[()]"""), "")
+    if (a.matches(Regex("""(\+? *[-\d ]*(\([-\d ]+\))?){2,}"""))) return a.replace(Regex("""[()]"""), "")
     return ""
 }
 
