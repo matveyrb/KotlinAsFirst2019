@@ -71,7 +71,7 @@ fun main() {
  * Обратите внимание: некорректная с точки зрения календаря дата (например, 30.02.2009) считается неверными
  * входными данными.
  */
-/*  val dates = listOf(
+val dates = listOf(
     "",
     "января",
     "февраля",
@@ -85,7 +85,7 @@ fun main() {
     "октября",
     "ноября",
     "декабря"
-)*/
+)
 
 fun dateStrToDigit(str: String): String {
     val dates = str.split(" ").toMutableList()

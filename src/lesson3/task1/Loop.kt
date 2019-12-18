@@ -256,6 +256,7 @@ fun hasDifferentDigits(n: Int): Boolean {
     while (a > 9) {
         if ((a % 10) != (a % 100 / 10)) {
             b += 1
+            break
         }
         a /= 10
     }
