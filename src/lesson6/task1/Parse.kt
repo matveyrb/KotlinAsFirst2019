@@ -244,7 +244,24 @@ fun mostExpensive(description: String): String = TODO()
  *
  * Вернуть -1, если roman не является корректным римским числом
  */
-fun fromRoman(roman: String): Int = TODO()
+fun fromRoman(roman: String): Int {
+    if (Regex("""[IVXLCDM]+""").matches(roman)) {
+        return roman
+            .replace("CM", "DCD")
+            .replace("M", "DD")
+            .replace("CD", "CCCC")
+            .replace("D", "CCCCC")
+            .replace("XC", "LXL")
+            .replace("C","LL")
+            .replace("XL", "XXXX")
+            .replace("L", "XXXXX")
+            .replace("IX", "VIV")
+            .replace("X", "VV")
+            .replace("IV", "IIII")
+            .replace("V", "IIIII").length
+    }
+    return -1
+}
 
 /**
  * Очень сложная
