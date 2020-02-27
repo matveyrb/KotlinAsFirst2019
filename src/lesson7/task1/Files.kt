@@ -87,9 +87,7 @@ fun sibilants(inputName: String, outputName: String) {
         .replace(Regex("""(?<=[ЖжЧчШшЩщ])я"""), "а")
         .replace(Regex("""(?<=[ЖжЧчШшЩщ])Ю"""), "У")
         .replace(Regex("""(?<=[ЖжЧчШшЩщ])ю"""), "у")
-    val b = File(outputName).bufferedWriter()
-    b.write(a)
-    b.close()
+    File(outputName).bufferedWriter().use { it.write(a) }
 }
 
 /**
@@ -110,7 +108,18 @@ fun sibilants(inputName: String, outputName: String) {
  *
  */
 fun centerFile(inputName: String, outputName: String) {
-    TODO()
+    val a = File(inputName).readLines().map { it.trim() }
+    var max = -1
+    for (i in a)
+        if (max < i.length)
+            max = i.length
+    File(outputName).bufferedWriter().use {
+        for (i in a) {
+            val b = max - i.length
+            it.write(" ".repeat((b) / 2) + i)
+            it.newLine()
+        }
+    }
 }
 
 /**
