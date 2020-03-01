@@ -61,7 +61,7 @@ class Tests {
     }
 
     @Test
-    @Tag("Normal")
+    @Tag("Example")
     fun lineEquals() {
         run {
             val first = Line(Point(0.0, 0.0), 0.0)
@@ -127,7 +127,7 @@ class Tests {
     }
 
     @Test
-    @Tag("Example")
+    @Tag("Normal")
     fun diameter() {
         val p1 = Point(0.0, 0.0)
         val p2 = Point(1.0, 4.0)
