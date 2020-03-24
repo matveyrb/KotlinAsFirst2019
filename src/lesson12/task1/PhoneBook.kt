@@ -102,5 +102,8 @@ class PhoneBook {
      * и каждому человеку соответствует одинаковый набор телефонов.
      * Порядок людей / порядок телефонов в книге не должен иметь значения.
      */
-    override fun equals(other: Any?): Boolean = TODO()
+    override fun equals(other: Any?): Boolean = other is PhoneBook && book == other.book
+
+    override fun hashCode(): Int = book.hashCode()
+
 }
