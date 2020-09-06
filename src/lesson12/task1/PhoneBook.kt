@@ -39,13 +39,7 @@ class PhoneBook {
      * и false, если человек с таким именем отсутствовал в телефонной книге
      * (во втором случае телефонная книга не должна меняться).
      */
-    fun removeHuman(name: String): Boolean {
-        if (book.containsKey(name)) {
-            book.remove(name)
-            return true
-        }
-        return false
-    }
+    fun removeHuman(name: String): Boolean = book.remove(name) != null
 
     /**
      * Добавить номер телефона.
@@ -76,7 +70,7 @@ class PhoneBook {
         return if (name !in book.keys || phone !in book.getValue(name))
             false
         else {
-            book[name]!!.remove(phone)
+            book[name]?.remove(phone)
             true
         }
     }

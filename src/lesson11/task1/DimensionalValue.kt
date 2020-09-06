@@ -20,58 +20,120 @@ class DimensionalValue(value: Double, dimension: String) : Comparable<Dimensiona
     /**
      * Величина с БАЗОВОЙ размерностью (например для 1.0Kg следует вернуть результат в граммах -- 1000.0)
      */
-    val value: Double get() = TODO()
+    val value: Double = run {
+        val dimensionVal = Dimension.values()
+        val prefixVal = DimensionPrefix.values()
+        val firstLetter = dimension.first().toString()
+        if (dimension.length == 1) value
+        else {
+            if (dimensionVal.find { it.abbreviation == dimension.removePrefix(firstLetter) } == null &&
+                prefixVal.find { it.abbreviation == firstLetter } == null)
+                throw IllegalArgumentException()
+            else value * prefixVal.find { it.abbreviation == firstLetter }?.multiplier!!
+        }
+
+    }
 
     /**
      * БАЗОВАЯ размерность (опять-таки для 1.0Kg следует вернуть GRAM)
      */
-    val dimension: Dimension get() = TODO()
+    val dimension: Dimension = run {
+        val dimensionVal = Dimension.values()
+        val firstLetter = dimension.first().toString()
+        if (dimension.length > 1) dimensionVal.find { it.abbreviation == dimension.removePrefix(firstLetter) }
+            ?: throw IllegalArgumentException()
+        else
+            dimensionVal.find { it.abbreviation == dimension } ?: throw IllegalArgumentException()
+
+    }
 
     /**
      * Конструктор из строки. Формат строки: значение пробел размерность (1 Kg, 3 mm, 100 g и так далее).
      */
-    constructor(s: String) : this(TODO(), TODO())
+    constructor(s: String) : this(s.substringBefore(" ").toDouble(), s.substringAfter(" "))
 
     /**
      * Сложение с другой величиной. Если базовая размерность разная, бросить IllegalArgumentException
      * (нельзя складывать метры и килограммы)
      */
-    operator fun plus(other: DimensionalValue): DimensionalValue = TODO()
+    operator fun plus(other: DimensionalValue): DimensionalValue {
+        if (dimension == other.dimension)
+            return DimensionalValue(value + other.value, dimension.abbreviation)
+        else
+            throw IllegalArgumentException()
+    }
 
     /**
      * Смена знака величины
      */
-    operator fun unaryMinus(): DimensionalValue = TODO()
+    operator fun unaryMinus(): DimensionalValue = DimensionalValue((-1.0) * value, dimension.abbreviation)
 
     /**
      * Вычитание другой величины. Если базовая размерность разная, бросить IllegalArgumentException
      */
-    operator fun minus(other: DimensionalValue): DimensionalValue = TODO()
+    operator fun minus(other: DimensionalValue): DimensionalValue {
+        if (dimension == other.dimension)
+            return DimensionalValue(value - other.value, dimension.abbreviation)
+        else
+            throw IllegalArgumentException()
+
+    }
 
     /**
      * Умножение на число
      */
-    operator fun times(other: Double): DimensionalValue = TODO()
+    operator fun times(other: Double): DimensionalValue =
+        DimensionalValue(value * other, dimension.abbreviation)
 
     /**
      * Деление на число
      */
-    operator fun div(other: Double): DimensionalValue = TODO()
+    operator fun div(other: Double): DimensionalValue =
+        DimensionalValue(value / other, dimension.abbreviation)
 
     /**
      * Деление на другую величину. Если базовая размерность разная, бросить IllegalArgumentException
      */
-    operator fun div(other: DimensionalValue): Double = TODO()
+    operator fun div(other: DimensionalValue): Double {
+        if (dimension == other.dimension)
+            return value / other.value
+        else throw IllegalArgumentException()
+    }
 
     /**
      * Сравнение на равенство
      */
-    override fun equals(other: Any?): Boolean = TODO()
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as DimensionalValue
+
+        if (value != other.value) return false
+        if (dimension != other.dimension) return false
+
+        return true
+    }
 
     /**
      * Сравнение на больше/меньше. Если базовая размерность разная, бросить IllegalArgumentException
      */
-    override fun compareTo(other: DimensionalValue): Int = TODO()
+    override fun compareTo(other: DimensionalValue): Int =
+        if (dimension == other.dimension)
+            when {
+                value > other.value -> 1
+                value < other.value -> -1
+                else -> 0
+            }
+        else throw IllegalArgumentException()
+
+    override fun hashCode(): Int {
+        var result = value.hashCode()
+        result = 31 * result + dimension.hashCode()
+        return result
+    }
+
+
 }
 
 /**
